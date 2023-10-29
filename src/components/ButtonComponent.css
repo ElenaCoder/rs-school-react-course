@@ -1,0 +1,30 @@
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 10px 10px 10px;
+  width: 300px;
+}
+
+.error-button {
+  background-color: #d06d10;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.error-button:hover {
+  background-color: #d05010;
+  transform: scale(1.02);
+}
+
+.error-button:active {
+  font-size: 18px;
+  color: rgb(33, 32, 32);
+}
