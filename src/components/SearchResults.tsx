@@ -14,7 +14,7 @@ interface SearchResultsState {
   results: SearchResult[];
 }
 
-interface Planet {
+interface Person {
   name: string;
   status: string;
 }
@@ -30,7 +30,7 @@ class SearchResults extends Component<SearchResultsProps, SearchResultsState> {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        const fetchedResults: Planet[] = data.results.map((result: Planet) => ({
+        const fetchedResults: Person[] = data.results.map((result: Person) => ({
           name: result.name,
           status: result.status,
         }));
