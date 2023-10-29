@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SearchResults.css';
+import Loader from './Loader';
 
 interface SearchResultsProps {
   searchTerm: string;
@@ -12,6 +13,7 @@ interface SearchResult {
 
 interface SearchResultsState {
   results: SearchResult[];
+  loading: boolean;
 }
 
 interface Person {
@@ -22,9 +24,11 @@ interface Person {
 class SearchResults extends Component<SearchResultsProps, SearchResultsState> {
   state: SearchResultsState = {
     results: [],
+    loading: false,
   };
 
   fetchData = (searchTerm: string) => {
+    this.setState({ loading: true });
     const apiUrl = `https://rickandmortyapi.com/api/character/?name=${searchTerm}`;
 
     fetch(apiUrl)
@@ -35,10 +39,11 @@ class SearchResults extends Component<SearchResultsProps, SearchResultsState> {
           status: result.status,
         }));
 
-        this.setState({ results: fetchedResults });
+        this.setState({ results: fetchedResults, loading: false });
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
+        this.setState({ loading: false });
       });
   };
 
@@ -53,16 +58,20 @@ class SearchResults extends Component<SearchResultsProps, SearchResultsState> {
   }
 
   render() {
-    const { results } = this.state;
+    const { results, loading } = this.state;
     return (
       <div className="search-results">
         <h2>Search Results</h2>
-        {results.map((result) => (
-          <div className="result-item" key={result.name}>
-            <h3>{result.name}</h3>
-            <p>Status: {result.status}</p>
-          </div>
-        ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          results.map((result) => (
+            <div className="result-item" key={result.name}>
+              <h3>{result.name}</h3>
+              <p>Status: {result.status}</p>
+            </div>
+          ))
+        )}
       </div>
     );
   }
