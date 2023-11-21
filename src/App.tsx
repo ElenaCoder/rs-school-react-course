@@ -9,15 +9,8 @@ interface AppState {
 
 class App extends Component<object, AppState> {
   state: AppState = {
-    searchTerm: '',
+    searchTerm: localStorage.getItem('searchTerm') || '',
   };
-
-  componentDidMount(): void {
-    const savedSearchTerm = localStorage.getItem('searchTerm');
-    if (savedSearchTerm) {
-      this.setState({ searchTerm: savedSearchTerm });
-    }
-  }
 
   handleSearch = (term: string): void => {
     this.setState({ searchTerm: term });
