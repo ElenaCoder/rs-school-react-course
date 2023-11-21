@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SearchResults.css';
 import Loader from './Loader';
+import SearchResultCard from './SearchResultCard';
 
 interface SearchResultsProps {
   searchTerm: string;
@@ -66,10 +67,11 @@ class SearchResults extends Component<SearchResultsProps, SearchResultsState> {
           <Loader />
         ) : (
           results.map((result) => (
-            <div className="result-item" key={result.name}>
-              <h3>{result.name}</h3>
-              <p>Status: {result.status}</p>
-            </div>
+            <SearchResultCard
+              key={result.name}
+              name={result.name}
+              status={result.status}
+            />
           ))
         )}
       </div>
